@@ -69,6 +69,8 @@ export default function createWindow(windowName, options) {
   win = new BrowserWindow({
     ...options,
     ...state,
+    autoHideMenuBar: true,
+    icon: '/favicon.ico',
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
