@@ -11,8 +11,12 @@
     "postinstall": "electron-builder install-app-deps"
   },
   "dependencies": {
+    "@electron/remote": "^2.0.8",
     "electron-serve": "^1.1.0",
-    "electron-store": "^8.1.0"
+    "electron-store": "^8.1.0",
+    "react-cookie": "^4.1.1",
+    "react-icons": "^4.6.0",
+    "spotify-web-api-node": "^5.0.2"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.7",

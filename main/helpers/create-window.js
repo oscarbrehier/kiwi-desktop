@@ -9,8 +9,8 @@ export default function createWindow(windowName, options) {
   const name = `window-state-${windowName}`;
   const store = new Store({ name });
   const defaultSize = {
-    width: options.width,
-    height: options.height,
+    width: 1080,
+    height: 400,
   };
   let state = {};
   let win;
@@ -71,14 +71,15 @@ export default function createWindow(windowName, options) {
     ...state,
     autoHideMenuBar: true,
     icon: '/favicon.ico',
+    resizable: false,
+    fullscreenable: false,
+    // titleBarStyle: 'hidden',
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
       ...options.webPreferences,
     },
   });
-
-  win.on('close', saveState);
-
+  
   return win;
 };
