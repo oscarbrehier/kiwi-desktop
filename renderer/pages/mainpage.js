@@ -1,38 +1,9 @@
 import { useRouter } from 'next/router';
-import { useCookies } from 'react-cookie';
-// import getToken from '../lib/token';
-// import addToken, {access_token} from '../json/token';
 
-import { getToken, addToken } from '../json/token';
+const Spotify = ({  }) => {
 
-export const getStaticProps = async () => {
-
-    // const res = access_token.access_token;
-    const res = getToken();
-    
-    // if(res) {
-
-    //     return {
-    //         redirect: {
-    //             permanent: true,
-    //             destinantion: '/main'
-    //         }
-    //     }
-
-    // }
-
-    // addToken('hey')
-    const data = getToken();
-
-    return { props: { data } };
-
-}
-
-const Spotify = ({ data }) => {
-
-    console.log(data);
     const endpoint = 'https://accounts.spotify.com/authorize';
-    const redirect = 'http://localhost:8888/callback';
+    const redirect = 'https://kiwi-token-handler.herokuapp.com/callback';
     const cliendId = '6500a893d198432a8511599a60ac8ae3';
 
     const scopes = ["playlist-read-private", "user-top-read", "user-read-recently-played", "user-library-read"];

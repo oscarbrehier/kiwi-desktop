@@ -9,8 +9,8 @@ export default function createWindow(windowName, options) {
   const name = `window-state-${windowName}`;
   const store = new Store({ name });
   const defaultSize = {
-    width: 1080,
-    height: 400,
+    width: 1350,
+    height: 590,
   };
   let state = {};
   let win;

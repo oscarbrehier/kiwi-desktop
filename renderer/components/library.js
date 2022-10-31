@@ -1,5 +1,6 @@
 import { useState } from "react";
 import LibraryItem from "./libraryItem";
+import uniqid from 'uniqid';
 
 const Library = ({ tracks, saved }) => {
 
@@ -15,7 +16,7 @@ const Library = ({ tracks, saved }) => {
             </div>
             <div className="w-[90%] space-y-4">
                 {
-                    tracks.body.items.slice(0, trackLimit).map((item) => (<LibraryItem item={item} />))
+                    tracks.body.items.slice(0, trackLimit).map((item) => (<LibraryItem item={item} key={uniqid()} />))
                 }
             </div>
             <div onClick={handleClick}>
@@ -27,7 +28,7 @@ const Library = ({ tracks, saved }) => {
             </div>
             <div className="w-[90%] space-y-4">
                 {
-                    saved.body.items.map((item) => (<LibraryItem item={item} />))
+                    saved.body.items.map((item) => (<LibraryItem item={item} key={uniqid()} />))
                 }
             </div>
         </div>

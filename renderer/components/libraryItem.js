@@ -1,7 +1,5 @@
 const LibraryItem = ({item}) => {
 
-    console.log(item)
-
     return (
 
         <div className="h-20 flex">

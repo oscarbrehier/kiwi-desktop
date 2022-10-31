@@ -2,10 +2,12 @@ import Client from "../lib/client";
 import { useState } from "react";
 import { FaLongArrowAltLeft } from 'react-icons/fa';
 import { useRouter } from 'next/router';
+import { getToken } from '../json/token';
 
-export const getStaticProps  = async (context) => {
+export const getStaticProps  = async () => {
 
-    Client.setAccessToken(context.req.headers.cookie.slice(13));
+    const token = getToken();
+    Client.setAccessToken(token);
     const user = await Client.getMe();
 
     return {

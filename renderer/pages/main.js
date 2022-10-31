@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Client from '../lib/client';
 import { getToken } from '../json/token';
 import Library from '../components/library';
+import uniqid from 'uniqid';
 
 export const getStaticProps  = async () => {
 
@@ -19,7 +20,6 @@ export const getStaticProps  = async () => {
     return {
 
         props: { user, tracks, saved }
-        // props: { data }
 
     }
 
@@ -28,7 +28,6 @@ export const getStaticProps  = async () => {
 const Main = ({user,tracks,saved, data}) => {
 
     const [userInfo, setUserInfo] = useState(user);
-    console.log(data);
 
     return (
 
@@ -59,7 +58,7 @@ const Main = ({user,tracks,saved, data}) => {
 
                 <section className='w-full h-full flex items-center justify-center flex-col'>
                     <p className='text-white font-semibold text-2xl'>No Received Songs Yet</p>
-                    <Library tracks={tracks} saved={saved} />
+                    <Library tracks={tracks} saved={saved} key={uniqid()} />
                 </section>
 
             </div>

@@ -14,17 +14,24 @@ if (isProd) {
 	await app.whenReady();
 
 	const mainWindow = createWindow('main', {
-		width: 1000,
-		height: 800,
+		width: 1350,
+		height: 590,
 	});
 
 	if (isProd) {
-		await mainWindow.loadURL('app://./home.html');
+		await mainWindow.loadURL('app://./mainpage.html');
 	} else {
 		const port = process.argv[2];
-		await mainWindow.loadURL(`http://localhost:${port}/home`);
+		await mainWindow.loadURL(`http://localhost:${port}/mainpage`);
 		mainWindow.webContents.openDevTools();
 	}
+
+	// app.on('second-instance', async () => {
+	// 	app.relaunch();
+	// 	await mainWindow.loadURL('app://./callback.html');
+	// 	app.exit();
+	// });
+
 })();
 
 app.on('window-all-closed', () => {
