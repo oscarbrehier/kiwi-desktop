@@ -22,7 +22,7 @@ const Profile = ({ user }) => {
     const [rating, setRating] = useState(50);
     
     const router = useRouter();
-    const handleClick = () => router.push('/mainpage');
+    const handleClick = () => router.push('/main');
 
     return (
 

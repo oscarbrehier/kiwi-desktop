@@ -8,8 +8,6 @@ const Callback = () => {
     const { asPath } = useRouter();
     const token = asPath.slice(23, -34);
 
-    // const [cookie, setCookie] = useCookies(['access_token']);
-
     useEffect(() => {
 
         console.log(token)
