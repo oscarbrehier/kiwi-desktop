@@ -1,68 +1,63 @@
-import React from 'react';
-import Head from 'next/head';
-import Link from 'next/link';
-import { useState } from 'react';
-import Client from '../lib/client';
-import Library from '../components/library';
+import { useRouter } from 'next/router';
+import { useCookies } from 'react-cookie';
+// import getToken from '../lib/token';
+// import addToken, {access_token} from '../json/token';
 
-export const getServerSideProps = async (context) => {
+import { getToken, addToken } from '../json/token';
 
-	Client.setAccessToken(context.req.headers.cookie.slice(13));
+export const getStaticProps = async () => {
 
-	const user = await Client.getMe();
-	const tracks = await Client.getMyRecentlyPlayedTracks();
-	const saved = await Client.getMySavedTracks({ limit: 10 });
+    // const res = access_token.access_token;
+    const res = getToken();
+    
+    // if(res) {
 
-	return {
+    //     return {
+    //         redirect: {
+    //             permanent: true,
+    //             destinantion: '/main'
+    //         }
+    //     }
 
-		props: { user, tracks, saved }
+    // }
 
-	}
+    // addToken('hey')
+    const data = getToken();
+
+    return { props: { data } };
 
 }
 
-const Home = ({user,tracks,saved}) => {
+const Spotify = ({ data }) => {
 
-	const [userInfo, setUserInfo] = useState(user);
-	
-	return (
+    console.log(data);
+    const endpoint = 'https://accounts.spotify.com/authorize';
+    const redirect = 'http://localhost:8888/callback';
+    const cliendId = '6500a893d198432a8511599a60ac8ae3';
 
-		<React.Fragment>
+    const scopes = ["playlist-read-private", "user-top-read", "user-read-recently-played", "user-library-read"];
+    
+    const url = `${endpoint}?client_id=${cliendId}&redirect_uri=${redirect}&scope=${scopes.join('%20')}&response_type=token&show_dialog=true`;
 
-			<Head>
-				<title>Kiwi - Music with Friends</title>
-				<link rel="shortcut icon" type="image/jpg" href="/favicon.ico"></link>
-			</Head>
+    const router = useRouter();
 
-			<div className='h-auto w-full bg-black flex items-center flex-col'>
+    const handleClick = () => router.push(url);
 
-				<section className='w-[90%] h-16 flex justify-between fixed bg-black items-center'>
+    return (
 
-					<div className='h-10 w-10 bg-[#474747] rounded-full flex items-center justify-center cursor-pointer'>
-						<img className='h-5 w-5' src='/images/contact.png' />
-					</div>
-					<div className='w-1/2 h-full flex text-white uppercase font-semibold'>
-						<div className='w-full flex items-center justify-center'>Received</div>
-						<div className='w-full flex items-center justify-center'>Sent</div>
-						<div className='w-full flex items-center justify-center text-[#1ed760]'>My Library</div>
-					</div>
-					<Link href="/profile">
-						<img className='h-10 w-10 rounded-full' src={userInfo.body.images[0].url} alt="" />
-					</Link>
+        <div className='h-screen w-full flex flex-col items-center justify-center bg-black space-y-10 select-none'>
+            <div className='w-96 h-screen flex flex-col items-center justify-center space-y-10'>
+                <p className='text-white font-semibold text-4xl text-center'>Log into your streaming service</p>
+                <div onClick={handleClick} className='bg-[#1ed760] h-16 w-full rounded-full flex items-center justify-center space-x-2 cursor-pointer'>
+                    <p className='text-black font-bold text-xl uppercase flex items-center'>
+                        Spotify
+                    </p>
+                </div>
+            </div>
+        </div>
 
-				</section>
+    )
 
-				<section className='w-full h-full flex items-center justify-center flex-col'>
-					{/* <p className='text-white font-semibold text-2xl'>No Received Songs Yet</p> */}
-					<Library tracks={tracks} saved={saved} />
-				</section>
+}
 
-			</div>
-
-		</React.Fragment>
-
-	);
-
-};
-
-export default Home;
+export default Spotify; 

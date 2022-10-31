@@ -3,7 +3,7 @@ import { useState } from "react";
 import { FaLongArrowAltLeft } from 'react-icons/fa';
 import { useRouter } from 'next/router';
 
-export const getServerSideProps = async (context) => {
+export const getStaticProps  = async (context) => {
 
     Client.setAccessToken(context.req.headers.cookie.slice(13));
     const user = await Client.getMe();

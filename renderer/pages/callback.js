@@ -1,19 +1,21 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { useCookies } from 'react-cookie';
+import {addToken,getToken} from '../json/token';
 
 const Callback = () => {
 
     const router = useRouter();
     const { asPath } = useRouter();
-    const access_token = asPath.slice(23, -34);
+    const token = asPath.slice(23, -34);
 
-    const [cookie, setCookie] = useCookies(['access_token']);
+    // const [cookie, setCookie] = useCookies(['access_token']);
 
     useEffect(() => {
 
-        setCookie('access_token', access_token, { path: '/', maxAge: 3600 });
-        router.push('/mainpage')
+        console.log(token)
+        addToken(token);
+        console.log(getToken())
+        router.push('/main');
 
     });
 
