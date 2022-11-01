@@ -11,6 +11,10 @@ export const getStaticProps  = async () => {
 
     const token = getToken();
 
+    if(!token) {
+        return { redirect: '/mainpage' }
+    }
+
     Client.setAccessToken(token);
 
     const user = await Client.getMe();
@@ -19,15 +23,16 @@ export const getStaticProps  = async () => {
 
     return {
 
-        props: { user, tracks, saved }
+        props: { user, tracks, saved, token }
 
     }
 
 }
 
-const Main = ({user,tracks,saved, data}) => {
+const Main = ({user,tracks,saved,token}) => {
 
     const [userInfo, setUserInfo] = useState(user);
+    console.log(token);
 
     return (
 

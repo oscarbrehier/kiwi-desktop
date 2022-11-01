@@ -74,12 +74,16 @@ export default function createWindow(windowName, options) {
     resizable: false,
     fullscreenable: false,
     // titleBarStyle: 'hidden',
+    width: 705,
+    height: 600,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
       ...options.webPreferences,
     },
   });
+
+  win.center();
   
   return win;
 };

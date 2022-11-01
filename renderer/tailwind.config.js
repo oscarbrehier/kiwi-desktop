@@ -4,7 +4,11 @@ module.exports = {
     './renderer/components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        "spotify": "#1ed760"
+      }
+    },
   },
   plugins: [],
 };

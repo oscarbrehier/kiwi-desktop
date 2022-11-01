@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import {addToken,getToken} from '../json/token';
+import Head from 'next/head';
+import { Fragment } from 'react';
 
 const Callback = () => {
 
@@ -19,9 +21,12 @@ const Callback = () => {
 
     return (
 
-        <div>
-
-        </div>
+        <Fragment>
+            <Head>
+                <title>Kiwi - Music with friends</title>
+            </Head>
+            <div></div>
+        </Fragment>
 
     );
 

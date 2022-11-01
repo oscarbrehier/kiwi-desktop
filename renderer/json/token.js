@@ -13,7 +13,7 @@ export const addToken = (token) => {
         if(err) {
             console.log(err)
         }
-    })
+    });
 
 };
 
